@@ -1,12 +1,13 @@
 import './App.css'
+import Nav from './components/Nav';
 
 function App() {
 
   return (
     <>
-    <h4>Hello world from Vite</h4>
+      <Nav></Nav>
     </>
   )
 }
 
-export default App
+export default App;
