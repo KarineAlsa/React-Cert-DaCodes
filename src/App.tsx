@@ -1,12 +1,9 @@
-import './App.css'
-import Nav from './components/Nav';
+import { Router } from "./routes/Router";
 
 function App() {
 
   return (
-    <>
-      <Nav></Nav>
-    </>
+   <Router></Router>
   )
 }
 
