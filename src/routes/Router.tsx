@@ -1,17 +1,23 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import { LoginPage } from "../pages/LoginPage"
 import { PrivateRoutes } from "./PrivateRoutes"
-
-type Status = 'checking' | 'authenticated' | 'no-authenticated'
-
-let status: Status = 'no-authenticated'
+import {useState, useEffect} from "react"
 
 export const Router = () => {
+    const [auth, setAuth] = useState<boolean>(false);
+
+    useEffect(() =>{
+    const token = localStorage.getItem('auth');
+    if(token?.length === 32){
+        setAuth(true);
+    }
+    },[])
+
     return (
         <BrowserRouter>
             <Routes>
                 {
-                    status === 'authenticated'
+                    auth 
                         ? <Route path="/*" element={<PrivateRoutes />} />
                         : <Route path="login" element={<LoginPage />} />
                 }

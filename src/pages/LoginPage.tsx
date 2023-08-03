@@ -1,12 +1,12 @@
 import Footer from "../components/Footer"
+import FormPage from "../components/FormPage"
 import Nav from "../components/Nav"
 
 export const LoginPage = () => {
     return (
         <div>
             <Nav></Nav>
-            <h3>Hola</h3>
-            <h2>Hola</h2>
+            <FormPage></FormPage>
             <Footer></Footer>
         </div>
     )

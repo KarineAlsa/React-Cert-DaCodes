@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <div className='bg-[url("/footer.png")] w-full h-[700px] mt-32 py-10 px-12 bg-cover'>
+    <div className='bg-[url("/footer.png")] h-[700px] mt-32 py-10 px-12 bg-cover'>
       <div>
         <div className="mx-12 mt-24">
           <h2 className="text-xl">
