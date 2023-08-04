@@ -11,6 +11,8 @@ interface Movie {
   title: string;
   overview: string;
   posters: string;
+  date: string;
+  genre: string;
   stars: number;
 }
 
@@ -46,23 +48,47 @@ const handlePrevious = (e: React.MouseEvent<HTMLAnchorElement>) => {
     }
   };
 
+  const options2 = {
+    method: 'GET',
+    url: 'https://api.themoviedb.org/3/genre/movie/list',
+    params: {language: 'en-US', page: `${page}`},
+    headers: {
+      accept: 'application/json',
+      Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`  
+    }
+  };
+
   useEffect(() => {
-    axios
-      .request(options)
-      .then(function (response) {
+    // Obtener la lista de géneros
+    axios.request(options2).then(function (response) {
+      const genresData = response.data.genres;
+      
+    // Hacer la solicitud para obtener la lista de películas
+      axios.request(options).then(function (response) {
         setLastPage(response.data.total_pages);
-        const newData = response.data.results.map((movie: any) => ({
-          id: movie.id,
-          title: movie.title,
-          overview: movie.overview,
-          posters: movie.poster_path,
-          stars: movie.vote_average,
-        }));
+        const newData = response.data.results.map((movie: any) => {
+          const year = new Date(movie.release_date).getFullYear();
+          // Filtrar los géneros correspondientes a esta película por su genre_id
+          const genres = genresData.filter((genre: any) => movie.genre_ids.includes(genre.id));
+          const genreNames = genres.map((genre: any) => genre.name);
+          console.log(genreNames)
+          return {
+            id: movie.id,
+            title: movie.title,
+            overview: movie.overview,
+            posters: movie.poster_path,
+            date: year,
+            stars: movie.vote_average,
+            genre: genreNames.length > 0 ? genreNames.join('/') : ['Desconocido'], // Si no hay géneros, se asigna 'Desconocido'
+          };
+        });
         setMovies(newData);
-      })
-      .catch(function (err) {
+      }).catch(function (err) {
         console.error(err);
       });
+    }).catch(function (err) {
+      console.error(err);
+    });
   }, [page]);
 
   const handleTop = () => {
