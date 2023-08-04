@@ -1,4 +1,3 @@
-"use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -63,61 +62,60 @@ export default function FormPage() {
   };
   return (
     <main className="flex flex-col text-white mx-6 lg:mx-28 mt-20">
-      <div>
-        <h2 className="font-poppinsBold text-2xl">Login</h2>
-        <h2 className="text-base font-poppins">¡Bienvenido!</h2>
+    <div>
+      <h2 className="text-4xl">Login</h2>
+      <h3 className="text-lg">¡Bienvenido!</h3>
+    </div>
+    <form onSubmit={handleSubmit}>
+      <div className="flex flex-col max-w-md mt-12">
+        <label className="mb-3 text-sm" htmlFor="email">
+          Correo electrónico de DaCodes
+        </label>
+        <input
+          className="bg-[#5141EA] rounded-xl py-1 px-2"
+          type="text"
+          id="email"
+          name="email"
+          onChange={handleChange}
+        />
       </div>
-      <form onSubmit={handleSubmit}>
-        <div className="flex flex-col max-w-lg mt-12">
-          <label className="mb-3 font-poppins" htmlFor="email">
-            Correo electrónico de DaCodes
-          </label>
-          <input
-            className="bg-[#5141EA] rounded-xl py-2 px-4"
-            type="text"
-            id="email"
-            name="email"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex flex-col max-w-lg mt-6">
-          <label className="mb-3 font-poppins" htmlFor="pass">
-            Contraseña
-          </label>
-          <input
-            className="bg-[#5141EA] rounded-xl py-2 px-4"
-            type="password"
-            id="pass"
-            name="password"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex justify-start items-center space-x-3 ml-4 max-w-lg mt-6">
-          <input
-            className="bg-[#D9D9D980] checked:before:bg-black rounded-xl"
-            type="checkbox"
-            id="terms"
-            name="terms"
-            onChange={handleChange}
-          />
-          <label className="font-poppins text-sm italic" htmlFor="terms">
-            He leido y acepto los terminos y condiciones
-          </label>
-        </div>
-        <div className="mt-6">
-          <button
-            disabled={disabled}
-            className={`py-2 px-6 rounded-2xl font-poppinsBold duration-300 ${
-              disabled
-                ? "cursor-not-allowed bg-[#2924aa] text-[#413da0]"
-                : "bg-gradient-to-r from-[#00ffd0] to-[#4e6ce4] cursor-pointer"
-            }`}
-            type="submit"
-          >
-            Crear cuenta
-          </button>
-        </div>
-      </form>
-    </main>
+      <div className="flex flex-col max-w-md mt-6">
+        <label className="mb-3 text-sm" htmlFor="pass">
+          Contraseña
+        </label>
+        <input
+          className="bg-[#5141EA] rounded-xl py-1 px-2"
+          type="password"
+          id="pass"
+          name="password"
+          onChange={handleChange}
+        />
+      </div>
+      <div className="flex items-center gap-1 mt-6">
+        <input
+          type="checkbox"
+          id="terms"
+          name="terms"
+          onChange={handleChange}
+        />
+        <label className="text-xs" htmlFor="terms">
+          He leido y acepto los terminos y condiciones
+        </label>
+      </div>
+      <div className="mt-2">
+        <button
+          disabled={disabled}
+          className={`py-2 px-6 rounded-2xl font-poppinsBold duration-300 ${
+            disabled
+              ? 'cursor-not-allowed bg-gray-400 text-gray-600'
+              : 'bg-gradient-to-r from-[#00ffd0] to-[#4e6ce4] cursor-pointer'
+          }`}
+          type="submit"
+        >
+          Crear cuenta
+        </button>
+      </div>
+    </form>
+  </main>
   );
 }
