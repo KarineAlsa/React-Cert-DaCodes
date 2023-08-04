@@ -1,32 +1,38 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 
-
 interface Form {
   email: string;
   password: string;
   terms: boolean;
 }
 
+
 export default function FormPage() {
+
+  const url = useRef<HTMLAnchorElement>(null);
   const [auth, setAuth] = useState<string>();
-  const [data, setData] = useState<Form>({
+  const [disabled, setDisabled] = useState<boolean>(true);
+  const [info, setInfo] = useState<Form>({
     email: "",
     password: "",
     terms: false,
   });
-  const enlaceRef = useRef<HTMLAnchorElement>(null);
 
   const options = {
+
     method: "GET",
     url: "https://api.themoviedb.org/3/authentication/guest_session/new",
     headers: {
       accept: "application/json",
       Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`,
     },
+    
   };
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+
     event.preventDefault();
+
     axios
       .request(options)
       .then(function (response) {
@@ -40,37 +46,44 @@ export default function FormPage() {
       });
   };
 
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type, checked } = event.target;
+    const newValue = type === "checkbox" ? checked : value;
+    setInfo((prevData) => ({
+      ...prevData,
+      [name]: newValue,
+    }));
+  };
+
   useEffect(() => {
     if (auth !== undefined) {
       localStorage.setItem("auth", auth); 
-      if (enlaceRef.current) {
-        enlaceRef.current.click();
+      if (url.current) {
+        url.current.click();
       }
     }
     
   }, [auth]);
 
-  const [disabled, setDisabled] = useState<boolean>(true);
+  
   useEffect(() => {
-    const isEmailValid = data.email.includes("@") && data.email.length > 8;
-    const isPasswordValid = data.password.length >= 8;
-    const isTermsAccepted = data.terms;
-    ``;
+
+    const isEmailValid = info.email.includes("@") && info.email.length > 8;
+    const isPasswordValid = info.password.length >= 8;
+    const isTermsAccepted = info.terms;
+    
     const isDisabled = !(isEmailValid && isPasswordValid && isTermsAccepted);
     setDisabled(isDisabled);
-  }, [data.email, data.password, data.terms]);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type, checked } = event.target;
-    const newValue = type === "checkbox" ? checked : value;
-    setData((prevData) => ({
-      ...prevData,
-      [name]: newValue,
-    }));
-  };
+    }, [info.email, 
+        info.password, 
+        info.terms]
+  );
+
+
   return (
     <main className="flex flex-col text-white mx-24 mt-16">
-      <a ref={enlaceRef} href="/"></a>
+      <a ref={url} href="/"></a>
     <div>
       <h2 className="text-4xl">Login</h2>
       <h3 className="text-lg">¡Bienvenido!</h3>

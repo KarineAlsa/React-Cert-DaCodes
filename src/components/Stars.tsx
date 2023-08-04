@@ -1,11 +1,8 @@
 import React from 'react'
 import {TbStarFilled, TbStarHalfFilled, TbStar} from "react-icons/tb"
-
-
 interface StarsProps {
     stars: number;
 }
-
 const Stars: React.FC<StarsProps> = (props) => {
     const { stars } = props;
 
