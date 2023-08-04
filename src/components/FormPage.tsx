@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import { useNavigate  } from "react-router-dom";
+
 
 interface Form {
   email: string;
@@ -15,18 +15,7 @@ export default function FormPage() {
     password: "",
     terms: false,
   });
-
-  const navigate = useNavigate();
-  function handleLogin() {
-    const timer = setTimeout(() => {
-      navigate("/");
-    }, 1000); // 2000 milisegundos = 2 segundos
-    return () => {
-      clearTimeout(timer);
-    };
-  }
-
-
+  const enlaceRef = useRef<HTMLAnchorElement>(null);
 
   const options = {
     method: "GET",
@@ -54,7 +43,11 @@ export default function FormPage() {
   useEffect(() => {
     if (auth !== undefined) {
       localStorage.setItem("auth", auth); 
+      if (enlaceRef.current) {
+        enlaceRef.current.click();
+      }
     }
+    
   }, [auth]);
 
   const [disabled, setDisabled] = useState<boolean>(true);
@@ -77,6 +70,7 @@ export default function FormPage() {
   };
   return (
     <main className="flex flex-col text-white mx-24 mt-16">
+      <a ref={enlaceRef} href="/now_playing_movies"></a>
     <div>
       <h2 className="text-4xl">Login</h2>
       <h3 className="text-lg">¡Bienvenido!</h3>
@@ -119,7 +113,6 @@ export default function FormPage() {
       </div>
       <div className="mt-2">
         <button
-          onClick={handleLogin}
           disabled={disabled}
           className={`py-2 px-6 rounded-2xl font-poppinsBold duration-300 ${
             disabled
