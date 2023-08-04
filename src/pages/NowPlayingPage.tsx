@@ -15,13 +15,29 @@ interface Movie {
 
 export default function NowPlayingPage() {
   const navigate = useNavigate();
-
   const [movies, setMovies] = useState<Movie[]>([]);
+  const [page, setPage] = useState<number>(1);
+  const [lastPage, setLastPage] = useState<number>(1);
+
+  const handleNext = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    if (page < lastPage) {
+        setPage(page + 1)
+    }
+
+}
+const handlePrevious = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    if (page >= 2) {
+        setPage(page - 1)
+    }
+}
+
 
   const options = {
     method: 'GET',
     url: 'https://api.themoviedb.org/3/movie/now_playing',
-    params: {language: 'en-US', page: '1'},
+    params: {language: 'en-US', page: `${page}`},
     headers: {
       accept: 'application/json',
       Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`  
@@ -30,6 +46,7 @@ export default function NowPlayingPage() {
 
   useEffect(() => {
     axios.request(options).then(function (response) {
+      setLastPage(response.data.total_pages);
       const newData = response.data.results.map((movie: any) => ({
         id: movie.id,
         title: movie.title,
@@ -41,7 +58,7 @@ export default function NowPlayingPage() {
     }).catch(function (err) {
       console.error(err);
     });
-  }, []);
+  }, [page]);
 
   const handleTop = () => {
     navigate('/top_rated_movies');
@@ -89,10 +106,27 @@ export default function NowPlayingPage() {
         <h2 className="text-white text-3xl mb-8 mt-10">
           Now Playing
         </h2>
-        <div className="h-screen mb-[35rem]">
+        <div className="h-screen mb-44">
         <Movies movies={movies} />
         </div>
-        <div>{/* <Pagination/> */}</div>
+        <div className="w-full p-16">
+            <div className="flex items-center mt-12 justify-center text-white">
+                <a
+                    onClick={handlePrevious}
+                    className={`py-2 px-4 text-xl  rounded-full ${page === 1 ? "bg-[#2924aa] cursor-not-allowed" : "bg-[#5141EA] cursor-pointer"}`}>
+                    {"<"}
+                </a>
+                <p
+                    className="px-4 cursor-text items-center text-xl ">
+                    {`${page}  / ${lastPage}`}
+                </p>
+                <a
+                    onClick={handleNext}
+                    className={`py-2 px-4 text-xl rounded-full ${page === lastPage ? "bg-[#2924aa] cursor-not-allowed" : "bg-[#5141EA] cursor-pointer"}`}>
+                    {">"}
+                </a>
+            </div>
+        </div>
       </main>
       <Footer></Footer>
     </>
