@@ -111,7 +111,7 @@ const handlePrevious = (e: React.MouseEvent<HTMLAnchorElement>) => {
         <h2 className="text-white text-3xl mb-8 mt-10">
           Upcoming
         </h2>
-        <div className="h-screen mb-44">
+        <div className="h-full mb-44">
         <Movies movies={movies} />
         </div>
         <div className="w-full p-16">
