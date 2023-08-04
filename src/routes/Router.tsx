@@ -23,10 +23,10 @@ export const Router = () => {
                     auth 
                         ? <Route path="/*" element={<PrivateRoutes />} />
                             
-                        : <Route path="/" element={<LoginPage />} />
+                        : <Route path="/login" element={<LoginPage />} />
                 }
                 
-                <Route path='*' element={<Navigate to='/' replace />} />
+                <Route path='*' element={<Navigate to='/login' replace />} />
             </Routes>
         </BrowserRouter>
     )
