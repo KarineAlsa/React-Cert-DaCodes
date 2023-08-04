@@ -1,28 +1,69 @@
+import { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import Nav from "../components/Nav";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Movies from "../components/Movies";
+
+interface Movie {
+  id: number;
+  title: string;
+  overview: string;
+  posters: string;
+  stars: number;
+}
 
 export default function PopularPage() {
   const navigate = useNavigate();
 
+  const [movies, setMovies] = useState<Movie[]>([]);
+
+  const options = {
+    method: "GET",
+    url: "https://api.themoviedb.org/3/movie/popular",
+    params: { language: "en-US", page: "1" },
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`,
+    },
+  };
+
+  useEffect(() => {
+    axios
+      .request(options)
+      .then(function (response) {
+        const newData = response.data.results.map((movie: any) => ({
+          id: movie.id,
+          title: movie.title,
+          overview: movie.overview,
+          posters: movie.poster_path,
+          stars: movie.vote_average,
+        }));
+        setMovies(newData);
+      })
+      .catch(function (err) {
+        console.error(err);
+      });
+  }, []);
+
   const handleTop = () => {
-    navigate('/top_rated_movies');
+    navigate("/top_rated_movies");
   };
   const handlePopular = () => {
-    navigate('/popular_movies');
+    navigate("/popular_movies");
   };
   const handleNow = () => {
-    navigate('/now_playing_movies');
+    navigate("/now_playing_movies");
   };
   const handleUpcoming = () => {
-    navigate('/upcoming_movies');
+    navigate("/upcoming_movies");
   };
 
   return (
     <>
       <Nav></Nav>
       <main className="mx-16">
-      <div className="flex justify-start space-x-3 mt-16 mb-4">
+        <div className="flex justify-start space-x-3 mt-16 mb-4">
           <button
             onClick={handleNow}
             className="px-6 rounded-xl text-white text-sm bg-gradient-to-r from-[#00ffd0] to-[#4e6ce4] "
@@ -48,11 +89,10 @@ export default function PopularPage() {
             <p>Upcoming</p>
           </button>
         </div>
-        {/* <Dock/> */}
-        <h2 className="text-white text-xl font-poppinsBold text-center md:text-start md:mx-16 mb-8">
-          Now Playing
-        </h2>
-        {/* <Movies movies={movies} /> */}
+        <h2 className="text-white text-3xl mb-8 mt-10">Popular</h2>
+        <div className="h-screen mb-[35rem]">
+          <Movies movies={movies} />
+        </div>
         <div>{/* <Pagination/> */}</div>
       </main>
       <Footer></Footer>

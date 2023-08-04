@@ -1,9 +1,52 @@
+import { useEffect, useState } from "react";
 import Footer from "../components/Footer";
+import Movies from "../components/Movies";
 import Nav from "../components/Nav";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
+
+interface Movie {
+  id: number;
+  title: string;
+  overview: string;
+  posters: string;
+  stars: number;
+}
+
 
 export default function TopRatedPage() {
   const navigate = useNavigate();
+  const [movies, setMovies] = useState<Movie[]>([]);
+
+  const options = {
+    method: 'GET',
+    url: 'https://api.themoviedb.org/3/movie/top_rated',
+    params: {language: 'en-US', page: '1'},
+    headers: {
+      accept: 'application/json',
+      Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`  
+    }
+  };
+
+  useEffect(() => {
+    axios
+      .request(options)
+      .then(function (response) {
+        const newData = response.data.results.map((movie: any) => ({
+          id: movie.id,
+          title: movie.title,
+          overview: movie.overview,
+          posters: movie.poster_path,
+          stars: movie.vote_average,
+        }));
+        setMovies(newData);
+      })
+      .catch(function (err) {
+        console.error(err);
+      });
+  }, []);
+
 
   const handleTop = () => {
     navigate('/top_rated_movies');
@@ -48,11 +91,12 @@ export default function TopRatedPage() {
             <p>Upcoming</p>
           </button>
         </div>
-        {/* <Dock/> */}
-        <h2 className="text-white text-xl font-poppinsBold text-center md:text-start md:mx-16 mb-8">
-          Now Playing
+        <h2 className="text-white text-3xl mb-8 mt-10">
+          Top Rated
         </h2>
-        {/* <Movies movies={movies} /> */}
+        <div className="h-screen mb-[35rem]">
+        <Movies movies={movies} />
+        </div>
         <div>{/* <Pagination/> */}</div>
       </main>
       <Footer></Footer>
