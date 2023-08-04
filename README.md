@@ -1,27 +1,25 @@
-# React + TypeScript + Vite
+# Movie Database App
+Este proyecto es una asignación para obtener la certificación de React Fundamentales de Dacodes. Movie Database App es una aplicación que utiliza *The Movie Database API (TMDB)* para mostrar un listado de películas. Consta de dos vistas:
+- Login 
+- Listado de películas
+### Url de la aplicación
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+## Tecnologías
+- React.js + Vite
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Login
+En la vista **Login** los usuarios deben completar un formulario con tres requisitos que requieren ser validados:
+- Correo electrónico
+- Contraseña
+- Aceptar los términos y condiciones
 
-## Expanding the ESLint configuration
+Una vez que los datos sean válidos, el botón Crear Cuenta se habilitará para dejar pasar a la segunda vista.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Listado de películas
+La vista **Listado de películas** es privada y solo es accesible después de haber pasado por la vista **Login**. Los usuarios pueden seleccionar entre diferentes páginas:
+- Now Playing
+- Popular
+- Top Rated
+- Upcoming
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
