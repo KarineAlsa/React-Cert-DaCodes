@@ -4,7 +4,6 @@ export default function Nav() {
   const handleLogOut = () => {
     localStorage.removeItem("auth");
   };
-
   return (
     <div>
       <ul className="px-12 flex justify-between items-center bg-[#5141EA] w-full h-12">

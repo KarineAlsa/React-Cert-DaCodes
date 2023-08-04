@@ -8,7 +8,6 @@ export const PrivateRoutes = () => {
     return (
         <Routes>
             <Route path='/now_playing_movies' element={<NowPlayingPage />} />
-            <Route path='/now_playing_movies' element={<NowPlayingPage />} />
             <Route path='/popular_movies' element={<PopularPage />} />
             <Route path='/top_rated_movies' element={<TopRatedPage />} />
             <Route path='/upcoming_movies' element={<UpcomingPage />} />

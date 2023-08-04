@@ -14,6 +14,7 @@ interface MoviesProps {
 }
 
 const Movies: React.FC<MoviesProps> = ({ movies }) => {
+  
   return (
     <div className="mx-auto h-full px-16">
       <div className="grid gap-6 grid-cols-5 place-items-center">

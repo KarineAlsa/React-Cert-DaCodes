@@ -17,5 +17,4 @@ const Stars: React.FC<StarsProps> = (props) => {
 
     return <div className="flex text-yellow-300 text-2xl">{ratingStars}</div>;
 };
-
 export default Stars;

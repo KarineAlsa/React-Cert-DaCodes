@@ -20,7 +20,6 @@ export const Router = () => {
         <BrowserRouter>
             <Routes>
             <Route path="/" element={<LoginPage />} />
-            <Route path="/" element={<LoginPage />} />
                 {
                     auth 
                         ? <Route path="/*" element={<PrivateRoutes />} />

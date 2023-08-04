@@ -9,7 +9,6 @@ interface Form {
 
 
 export default function FormPage() {
-
   const url = useRef<HTMLAnchorElement>(null);
   const [auth, setAuth] = useState<string>();
   const [disabled, setDisabled] = useState<boolean>(true);
