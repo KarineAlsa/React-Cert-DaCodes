@@ -3,7 +3,7 @@ Este proyecto es una asignación para obtener la certificación de React Fundame
 - Login 
 - Listado de películas
 ### Url de la aplicación
-[react-cert-dacodes-karine.vercel.app](react-cert-dacodes-karine.vercel.app)
+[react-cert-dacodes-karine.vercel.app](https://react-cert-dacodes-karine.vercel.app/)
 ## Tecnologías
 - React.js + Vite
 
