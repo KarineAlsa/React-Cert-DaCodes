@@ -4,6 +4,7 @@ export default function Nav() {
   const handleLogOut = () => {
     localStorage.removeItem("auth");
   };
+
   return (
     <div>
       <ul className="px-12 flex justify-between items-center bg-[#5141EA] w-full h-12">
@@ -12,7 +13,7 @@ export default function Nav() {
         </li>
         <li className="text-white cursor-pointer">
           <button onClick={handleLogOut}>
-            <a href="/login">
+            <a href="/">
               <PiUserCircleLight className="h-10 w-10" />
             </a>
           </button>
