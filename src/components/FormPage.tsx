@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Navigate  } from "react-router-dom";
+import { useNavigate  } from "react-router-dom";
 
 interface Form {
   email: string;
@@ -16,10 +16,16 @@ export default function FormPage() {
     terms: false,
   });
 
-  function handleLogin(){
-    window.location.reload();
-    return  <Navigate to="/now_playing_movies"/>
+  const navigate = useNavigate();
+  function handleLogin() {
+    const timer = setTimeout(() => {
+      navigate("/now_playing_movies");
+    }, 1000); // 2000 milisegundos = 2 segundos
+    return () => {
+      clearTimeout(timer);
+    };
   }
+
 
 
   const options = {
@@ -44,12 +50,13 @@ export default function FormPage() {
         console.log(err);
       });
   };
+
   useEffect(() => {
     if (auth !== undefined) {
       localStorage.setItem("auth", auth); 
-      handleLogin(); 
     }
   }, [auth]);
+
   const [disabled, setDisabled] = useState<boolean>(true);
   useEffect(() => {
     const isEmailValid = data.email.includes("@") && data.email.length > 8;
@@ -112,6 +119,7 @@ export default function FormPage() {
       </div>
       <div className="mt-2">
         <button
+          onClick={handleLogin}
           disabled={disabled}
           className={`py-2 px-6 rounded-2xl font-poppinsBold duration-300 ${
             disabled
