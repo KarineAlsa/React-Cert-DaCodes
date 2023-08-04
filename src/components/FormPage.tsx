@@ -61,7 +61,7 @@ export default function FormPage() {
     }));
   };
   return (
-    <main className="flex flex-col text-white mx-6 lg:mx-28 mt-20">
+    <main className="flex flex-col text-white mx-24 mt-16">
     <div>
       <h2 className="text-4xl">Login</h2>
       <h3 className="text-lg">¡Bienvenido!</h3>
