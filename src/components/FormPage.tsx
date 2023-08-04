@@ -70,7 +70,7 @@ export default function FormPage() {
   };
   return (
     <main className="flex flex-col text-white mx-24 mt-16">
-      <a ref={enlaceRef} href="/now_playing_movies"></a>
+      <a ref={enlaceRef} href="/"></a>
     <div>
       <h2 className="text-4xl">Login</h2>
       <h3 className="text-lg">¡Bienvenido!</h3>
