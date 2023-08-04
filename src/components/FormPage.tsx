@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Navigate  } from "react-router-dom";
 
 interface Form {
   email: string;
@@ -14,6 +15,13 @@ export default function FormPage() {
     password: "",
     terms: false,
   });
+
+  function handleLogin(){
+    window.location.reload();
+    return  <Navigate to="/now_playing_movies"/>
+  }
+
+
   const options = {
     method: "GET",
     url: "https://api.themoviedb.org/3/authentication/guest_session/new",
@@ -30,7 +38,6 @@ export default function FormPage() {
         const session_id = response.data.guest_session_id;
         if (session_id !== undefined) {
           setAuth(session_id);
-          window.location.reload();
         }
       })
       .catch(function (err) {
@@ -40,6 +47,7 @@ export default function FormPage() {
   useEffect(() => {
     if (auth !== undefined) {
       localStorage.setItem("auth", auth); 
+      handleLogin(); 
     }
   }, [auth]);
   const [disabled, setDisabled] = useState<boolean>(true);
