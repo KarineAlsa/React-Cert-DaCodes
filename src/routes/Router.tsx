@@ -1,15 +1,19 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import { LoginPage } from "../pages/LoginPage"
 import { PrivateRoutes } from "./PrivateRoutes"
-import {useState} from "react"
+import {useState,useEffect} from "react"
+
 
 export const Router = () => {
-    const [auth, setAuth] = useState<boolean>(false);
+    const [auth, setAuth] = useState<boolean>(true);
 
-    useState(() =>{
+    useEffect(() =>{
     const token = localStorage.getItem('auth');
     if(token?.length === 32){
         setAuth(true);
+    }
+    else{
+        setAuth(false);
     }
     })
     return (
@@ -18,8 +22,10 @@ export const Router = () => {
                 {
                     auth 
                         ? <Route path="/*" element={<PrivateRoutes />} />
+                            
                         : <Route path="login" element={<LoginPage />} />
                 }
+                
                 <Route path='*' element={<Navigate to='/login' replace />} />
             </Routes>
         </BrowserRouter>

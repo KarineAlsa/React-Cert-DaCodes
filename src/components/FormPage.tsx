@@ -31,7 +31,7 @@ export default function FormPage() {
         const session_id = response.data.guest_session_id;
         if (session_id !== undefined) {
           setAuth(session_id);
-          /*  router.push("/") */
+          window.location.reload();
         }
       })
       .catch(function (err) {
@@ -40,7 +40,7 @@ export default function FormPage() {
   };
   useEffect(() => {
     if (auth !== undefined) {
-      localStorage.setItem("auth", auth);
+      localStorage.setItem("auth", auth); 
     }
   }, [auth]);
   const [disabled, setDisabled] = useState<boolean>(true);
