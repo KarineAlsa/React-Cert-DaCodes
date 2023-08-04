@@ -24,10 +24,9 @@ export const Router = () => {
                     auth 
                         ? <Route path="/*" element={<PrivateRoutes />} />
                             
-                        : <Route path="/login" element={<LoginPage />} />
+                        : <Route path="/" element={<LoginPage />} />
                 }
-                <Route path="/login" element={<LoginPage />} />
-                <Route path='/*' element={<Navigate to='/login' replace />} />
+                <Route path='/*' element={<Navigate to='/' replace />} />
             </Routes>
         </BrowserRouter>
     )
