@@ -19,7 +19,7 @@ export default function FormPage() {
   const navigate = useNavigate();
   function handleLogin() {
     const timer = setTimeout(() => {
-      navigate("/now_playing_movies");
+      navigate("/");
     }, 1000); // 2000 milisegundos = 2 segundos
     return () => {
       clearTimeout(timer);
