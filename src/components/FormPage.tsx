@@ -67,10 +67,11 @@ export default function FormPage() {
   
   useEffect(() => {
 
-    const isEmailValid = info.email.includes("@") && info.email.length > 8;
-    const isPasswordValid = info.password.length >= 8;
+    const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+    const isEmailValid = emailRegex.test(info.email);
+    const isPasswordValid = info.password.length >= 7;
     const isTermsAccepted = info.terms;
-    
+  
     const isDisabled = !(isEmailValid && isPasswordValid && isTermsAccepted);
     setDisabled(isDisabled);
 
@@ -94,7 +95,7 @@ export default function FormPage() {
         </label>
         <input
           className="bg-[#5141EA] rounded-xl py-1 px-2"
-          type="text"
+          type="email"
           id="email"
           name="email"
           onChange={handleChange}
