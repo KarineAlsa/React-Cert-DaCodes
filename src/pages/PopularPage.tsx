@@ -132,6 +132,7 @@ const handlePrevious = (e: React.MouseEvent<HTMLAnchorElement>) => {
           </button>
         </div>
         <h2 className="text-white text-3xl mb-8 mt-10">Popular</h2>
+        <h3 className="text-white text-xl mb-8 mt-10">Aqui se encuentra un listado de las películas ordenadas por las más populares</h3>
         <div className="h-full mb-44">
           <Movies movies={movies} />
         </div>
