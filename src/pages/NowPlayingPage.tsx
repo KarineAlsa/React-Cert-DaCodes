@@ -136,6 +136,7 @@ const handlePrevious = (e: React.MouseEvent<HTMLAnchorElement>) => {
         <h2 className="text-white text-3xl mb-8 mt-10">
           Now Playing
         </h2>
+        <h3 className="text-white text-xl mb-8 mt-10">Aqui se encuentra un listado de las películas que se encuentran ahora en cines </h3>
         <div className="h-full mb-44">
         <Movies movies={movies} />
         </div>
