@@ -59,16 +59,15 @@ const handlePrevious = (e: React.MouseEvent<HTMLAnchorElement>) => {
   };
 
   useEffect(() => {
-    // Obtener la lista de géneros
+    
     axios.request(options2).then(function (response) {
       const genresData = response.data.genres;
       
-    // Hacer la solicitud para obtener la lista de películas
       axios.request(options).then(function (response) {
         setLastPage(response.data.total_pages);
         const newData = response.data.results.map((movie: any) => {
           const year = new Date(movie.release_date).getFullYear();
-          // Filtrar los géneros correspondientes a esta película por su genre_id
+          
           const genres = genresData.filter((genre: any) => movie.genre_ids.includes(genre.id));
           const genreNames = genres.map((genre: any) => genre.name);
           console.log(genreNames)
@@ -79,7 +78,7 @@ const handlePrevious = (e: React.MouseEvent<HTMLAnchorElement>) => {
             posters: movie.poster_path,
             date: year,
             stars: movie.vote_average,
-            genre: genreNames.length > 0 ? genreNames.join('/') : ['Desconocido'], // Si no hay géneros, se asigna 'Desconocido'
+            genre: genreNames.length > 0 ? genreNames.join('/') : ['Desconocido'], 
           };
         });
         setMovies(newData);
