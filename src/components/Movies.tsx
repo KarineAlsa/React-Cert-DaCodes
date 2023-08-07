@@ -31,7 +31,7 @@ const Movies: React.FC<MoviesProps> = ({ movies }) => {
               <div className="absolute h-full w-full bg-[#5241eaa7] flex flex-col items-center pt-8 px-6 -top-0 group-hover:top-0 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out text-white cursor-pointer">
                 <h2 className="text-lg text-center">{movie.title} </h2>
                 <h3 className="text-xs text-center">{movie.date} </h3>
-                <h4 className="text-xs text-center ">{movie.genre} </h4>
+                <h4 className="text-xs">{movie.genre} </h4>
                 <p className="text-xs line-clamp-5 mb-10 ">{movie.overview}</p>
                 <Stars stars={movie.stars} />
               </div>

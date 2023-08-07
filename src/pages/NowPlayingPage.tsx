@@ -75,7 +75,7 @@ const handlePrevious = (e: React.MouseEvent<HTMLAnchorElement>) => {
             posters: movie.poster_path,
             date: year,
             stars: movie.vote_average,
-            genre: genreNames.length > 0 ? genreNames.join('/') : ['Desconocido'],
+            genre: genreNames.length > 0 ? genreNames.join(' / ') : ['Desconocido'],
           };
         });
         setMovies(newData);
